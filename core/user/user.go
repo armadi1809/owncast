@@ -22,6 +22,7 @@ var _datastore *data.Datastore
 
 const (
 	moderatorScopeKey              = "MODERATOR"
+	streamerScopeKey               = "STREAMER"
 	minSuggestedUsernamePoolLength = 10
 )
 
@@ -274,6 +275,14 @@ func SetModerator(userID string, isModerator bool) error {
 	}
 
 	return removeScopeFromUser(userID, moderatorScopeKey)
+}
+
+// SetStreamer will add or remove streamer status for a single user by ID
+func SetStreamer(userID string, isStreamer bool) error {
+	if isStreamer {
+		return addScopeToUser(userID, streamerScopeKey)
+	}
+	return removeScopeFromUser(userID, streamerScopeKey)
 }
 
 func addScopeToUser(userID string, scope string) error {
